@@ -20,7 +20,7 @@
             var table;
             //$('#example').DataTable()
             $('#table_id').css('opacity', '0');
-            var scriptapi = "https://script.google.com/macros/s/AKfycbw7_qcy1OialnRbuYmScCqVFDMgdI0xb04iHe3wWMgeqjP1q6zSpBlo93PrcPiG_RSF/exec";
+            var scriptapi = "https://script.google.com/macros/s/AKfycbzfMggOSD477LhTHyEOwBl1TMjLQo-EO_dT1xSds4p-KlGIi4dylI86AOnAf3lEOtPp/exec";
             $.ajax({
 
                 "url": scriptapi,
@@ -36,8 +36,9 @@
                 }
             });
 
-            function datapassurl(id, clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment) {
+            function datapassurl(action,id, clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment) {
                 var request;
+                var action = action;
                 var id = id;
                 var clientname = clientname;
                 var marketplace = marketplace;
@@ -46,7 +47,47 @@
                 var accountmanger = accountmanger;
                 var status = status;
                 var comment = comment;
-                if (status =="Followup")
+                if (action =="open1")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=follwupopen",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+
+                });
+                }
+                if (action =="open2")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=completeopen",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+
+                });
+                }
+                if (action =="open3")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=canceltoopen",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+
+                });
+                // end open
+                }
+                if (action =="followup1")
                 {
                     $.ajax({
                     "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
@@ -56,10 +97,33 @@
                     "success" : function (data) {
                         location.reload();
                     }
-
                 });
                 }
-                if (status =="Complete")
+                if (action =="followup2")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=completefollw",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+                });
+                }
+                if (action =="followup3")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=cancelfollwup",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+                });
+                }
+                if (action =="complete1")
                 {
                     $.ajax({
                     "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
@@ -71,7 +135,31 @@
                     }
                 });
                 }
-                if (status =="Cancel")
+                if (action =="complete2")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=follwupcomplete",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+                });
+                }
+                if (action =="complete3")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=cancelcomplete",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+                });
+                }
+                if (action =="cancel1")
                 {
                     $.ajax({
                     "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
@@ -83,7 +171,30 @@
                     }
                 });
                 }
-             
+                if (action =="cancel2")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=follwupcancel",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+                });
+                }
+                if (action =="cancel3")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=completecancel",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+                });
+                }
 
             }
 
@@ -145,7 +256,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Open";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
             
                 }
                 if (action == "open2") {
@@ -157,7 +268,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Open";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
             
                 }
                 if (action == "open3") {
@@ -169,7 +280,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Open";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
             
                 }
                 if (action == "followup1") {
@@ -181,7 +292,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Followup";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
             
                 }
                 if (action == "followup2") {
@@ -193,7 +304,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Followup";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
             
                 }
                 if (action == "followup3") {
@@ -205,7 +316,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Followup";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
             
                 }
 
@@ -216,9 +327,9 @@
                 var typeofwork = data.typeofwork;
                 var meetingtime = data.meetingtime;
                 var accountmanger = data.accountmanger;
-                var status = "Complete";
+                var status = "Completed";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
                 }
                 if (action == "complete2") {
                 var id = data.id;
@@ -227,9 +338,9 @@
                 var typeofwork = data.typeofwork;
                 var meetingtime = data.meetingtime;
                 var accountmanger = data.accountmanger;
-                var status = "Complete";
+                var status = "Completed";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
                 }
                 if (action == "complete3") {
                 var id = data.id;
@@ -238,9 +349,9 @@
                 var typeofwork = data.typeofwork;
                 var meetingtime = data.meetingtime;
                 var accountmanger = data.accountmanger;
-                var status = "Complete";
+                var status = "Completed";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
                 }
 
                 if (action == "cancel1") {
@@ -252,7 +363,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Cancel";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
 
                 }
                 if (action == "cancel2") {
@@ -264,7 +375,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Cancel";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
 
                 }
                 if (action == "cancel3") {
@@ -276,7 +387,7 @@
                 var accountmanger = data.accountmanger;
                 var status = "Cancel";
                 var comment = data.comment;
-                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                datapassurl(action,id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
 
                 }
 
