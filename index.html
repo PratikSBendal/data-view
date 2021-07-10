@@ -20,7 +20,7 @@
             var table;
             //$('#example').DataTable()
             $('#table_id').css('opacity', '0');
-            var scriptapi = "https://script.google.com/macros/s/AKfycbxWkL9Vj6y5E2JpQHe_TPBi8fbaG1nxUEssZLbNMsEHqQff8aLvhWtBn7FGuSR69ipZ/exec";
+            var scriptapi = "https://script.google.com/macros/s/AKfycbw7_qcy1OialnRbuYmScCqVFDMgdI0xb04iHe3wWMgeqjP1q6zSpBlo93PrcPiG_RSF/exec";
             $.ajax({
 
                 "url": scriptapi,
@@ -52,19 +52,38 @@
                     "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
                     +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=masterfollowup",
                     "type": "GET",
-                    "datatype": 'json'
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+
                 });
                 }
                 if (status =="Complete")
                 {
                     $.ajax({
                     "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
-                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=follwtocomplete",
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=mastercomplete",
                     "type": "GET",
-                    "datatype": 'json'
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
                 });
                 }
-
+                if (status =="Cancel")
+                {
+                    $.ajax({
+                    "url": scriptapi + "?callback=ctrlq&id=" + id +"&clientname="+clientname+"&marketplace="+ marketplace+"&typeofwork="+typeofwork+"&meetingtime="
+                    +meetingtime+"&accountmanger="+accountmanger+"&status="+status+"&comment="+comment+"&action=mastercancel",
+                    "type": "GET",
+                    "datatype": 'json',
+                    "success" : function (data) {
+                        location.reload();
+                    }
+                });
+                }
+             
 
             }
 
@@ -90,23 +109,70 @@
                         // "defaultContent": "<button class=\"GetPosition\">Close</button>"
                         "render": function (data) {
                             if (data.status == "Open") {
-                                return "<button class=\"followup\">Followup</button><button class=\"complete\">Complete</button>";
+                                return "<button class=\"followup1\">Followup</button><button class=\"complete1\">Complete</button><button class=\"cancel1\">Cancel</button>";
                             }
-                            if (data.status == "Open") {
-                                return "<button class=\"complete\">Complete</button>";
+                            if(data.status == "Followup")
+                            {
+                                return "<button class=\"open1\">Open</button><button class=\"complete2\">Complete</button><button class=\"cancel2\">Cancel</button>";
                             }
-
+                            if(data.status == "Complete")
+                            {
+                                return "<button class=\"open2\">Open</button><button class=\"followup2\">Followup</button><button class=\"cancel3\">Cancel</button>";
+                            }
+                            if(data.status == "Cancel")
+                            {
+                                return "<button class=\"open3\">Open</button><button class=\"followup3\">Followup</button><button class=\"complete3\">Complete</button>";
+                            }
                         }
                     }]
                 });
 
             }
             $('#table_id').on('click', 'button', function () {
+                $('.followup').prop('disabled', true);
+                $('.complete').prop('disabled', true);
+                $('.cancel').prop('disabled', true);
+                $('.open').prop('disabled', true);
                 var action = this.className;
-
+               
                 var data = table.row($(this).parents('tr')).data();
-
-                if (action == "followup") {
+                if (action == "open1") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Open";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+            
+                }
+                if (action == "open2") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Open";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+            
+                }
+                if (action == "open3") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Open";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+            
+                }
+                if (action == "followup1") {
                 var id = data.id;
                 var clientname = data.clientname;
                 var marketplace = data.marketplace;
@@ -116,10 +182,34 @@
                 var status = "Followup";
                 var comment = data.comment;
                 datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
-                    location.reload();
+            
+                }
+                if (action == "followup2") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Followup";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+            
+                }
+                if (action == "followup3") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Followup";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+            
                 }
 
-                if (action == "complete") {
+                if (action == "complete1") {
                 var id = data.id;
                 var clientname = data.clientname;
                 var marketplace = data.marketplace;
@@ -129,15 +219,67 @@
                 var status = "Complete";
                 var comment = data.comment;
                 datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
-                    location.reload();
+                }
+                if (action == "complete2") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Complete";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+                }
+                if (action == "complete3") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Complete";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
                 }
 
-                // if (action == "GetPosition") {
-                //     var id = data.id;
-                //     var status = "Close";
-                //     statuschange(id, status);
-                //     location.reload();
-                // }
+                if (action == "cancel1") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Cancel";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+
+                }
+                if (action == "cancel2") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Cancel";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+
+                }
+                if (action == "cancel3") {
+                var id = data.id;
+                var clientname = data.clientname;
+                var marketplace = data.marketplace;
+                var typeofwork = data.typeofwork;
+                var meetingtime = data.meetingtime;
+                var accountmanger = data.accountmanger;
+                var status = "Cancel";
+                var comment = data.comment;
+                datapassurl(id,clientname,marketplace,typeofwork,meetingtime,accountmanger,status,comment);
+
+                }
+
 
 
             });
